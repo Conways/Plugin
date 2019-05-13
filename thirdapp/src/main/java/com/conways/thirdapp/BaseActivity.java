@@ -2,6 +2,7 @@ package com.conways.thirdapp;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -142,5 +143,12 @@ public class BaseActivity extends AppCompatActivity implements CommonInterface {
     @Override
     public void onSaveInstanceState(Bundle outState) {
 
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        Intent newIntent=new Intent();
+        newIntent.putExtra("className",intent.getComponent().getClassName());
+        hostContext.startActivity(newIntent);
     }
 }

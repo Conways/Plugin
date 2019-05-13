@@ -1,5 +1,6 @@
 package com.conways.plugin;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +20,10 @@ public class ThirdAppHolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         className = getIntent().getStringExtra("className");
         try {
-            Class activityClass=getClassLoader().loadClass(className);
-            Constructor constructor=activityClass.getConstructor(new Class[]{});
-            Object instance=constructor.newInstance(new Object[]{});
-            commonInterface= (CommonInterface) instance;
+            Class activityClass = getClassLoader().loadClass(className);
+            Constructor constructor = activityClass.getConstructor(new Class[]{});
+            Object instance = constructor.newInstance(new Object[]{});
+            commonInterface = (CommonInterface) instance;
             commonInterface.attch(this);
             commonInterface.onCreate(savedInstanceState);
         } catch (ClassNotFoundException e) {
@@ -82,5 +83,13 @@ public class ThirdAppHolderActivity extends AppCompatActivity {
     @Override
     public Resources getResources() {
         return PlugionManager.getInstance().getResources();
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        String className = intent.getStringExtra("className");
+        Intent intent1 = new Intent(this, ThirdAppHolderActivity.class);
+        intent1.putExtra("className", className);
+        super.startActivity(intent1);
     }
 }

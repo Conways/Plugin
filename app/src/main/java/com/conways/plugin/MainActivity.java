@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                File file=new File(getCacheDir().toString(),"thirdApp.apk");
+                File file=new File(getCacheDir().toString(),"thirdapp-debug.apk");
                 PlugionManager.getInstance().load(file.getAbsolutePath());
                 Intent intent=new Intent();
                 intent.setClass(MainActivity.this,ThirdAppHolderActivity.class);
